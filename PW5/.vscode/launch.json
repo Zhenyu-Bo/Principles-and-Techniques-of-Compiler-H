@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/sysYFParser", // 需要被调试的可执行文件
+            "args": ["${workspaceFolder}/testcase.sy"], // 命令行中剩下的参数
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb", // 不同OS需要做不同修改
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            // "preLaunchTask": "build" // 在launch调试之前预先执行的任务，在tasks.json中定义，可以为编译生成c1r_test等二进制文件的任务
+        }
+    ]
+}

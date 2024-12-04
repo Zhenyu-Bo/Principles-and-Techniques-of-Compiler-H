@@ -1,0 +1,4 @@
+// 简单的变量声明和赋值
+int a = 1;
+float b = 1.2;
+const int c = 2;

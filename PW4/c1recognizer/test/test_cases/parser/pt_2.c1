@@ -1,0 +1,11 @@
+// if-else
+void main()
+{
+    int a = 1, b = 2;
+    int max;
+    if ( a < b ) {
+        c = b;
+    } else {
+        c = a;
+    }
+}

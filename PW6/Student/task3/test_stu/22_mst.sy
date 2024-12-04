@@ -1,0 +1,99 @@
+const int maxn = 1025;
+
+int n, m;
+int u[maxn], v[maxn], w[maxn];
+
+void swap_index(int i, int j) {
+    int tmp = u[i];
+    u[i] = u[j];
+    u[j] = tmp;
+    tmp = v[i];
+    v[i] = v[j];
+    v[j] = tmp;
+    tmp = w[i];
+    w[i] = w[j];
+    w[j] = tmp;
+}
+
+void QuickSort(int low, int high)
+{
+    if (low < high) {
+        int i = low, j = low, k = high;
+        while (j < k) {
+            if (w[j] < w[k]) {
+                swap_index(i, j);
+                i = i + 1;
+            }
+            j = j + 1;
+        }
+        swap_index(i, k);
+        QuickSort(low, i - 1);
+        QuickSort(i + 1, high);
+    }
+}
+
+int fa[maxn];
+
+void init_dsu() {
+    int i = 0;
+    while (i <= n) {
+        fa[i] = -1;
+        i = i + 1;
+    }
+}
+
+int get_root(int u) {
+    if (fa[u] < 0) {
+        return u;
+    }
+    fa[u] = get_root(fa[u]);
+    return fa[u];
+}
+
+int union_root(int u, int v) {
+    if (fa[u] < fa[v]) {
+        int tmp = u;
+        u = v;
+        v = tmp;
+    }
+    fa[v] = fa[v] + fa[u];
+    fa[u] = v;
+    return 1;
+}
+
+int main() {
+    n = getint();
+    m = getint();
+    int i = 0;
+    while (i < m) {
+        u[i] = getint();
+        v[i] = getint();
+        w[i] = getint();
+        i = i + 1;
+    }
+    QuickSort(0, m - 1);
+    init_dsu();
+    i = 0;
+    int ans = 0;
+    putint(n);
+    putch(32);
+    putint(n - 1);
+    putch(10);
+    while (i < m) {
+        int a = get_root(u[i]);
+        int b = get_root(v[i]);
+        if (a != b && union_root(a, b)) {
+            putint(u[i]);
+            putch(32);
+            putint(v[i]);
+            putch(32);
+            putint(w[i]);
+            putch(10);
+            ans = ans + w[i];
+        }
+        i = i + 1;
+    }
+    putint(ans);
+    putch(10);
+    return 0;
+}

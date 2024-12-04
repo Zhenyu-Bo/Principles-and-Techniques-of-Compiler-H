@@ -1,0 +1,5 @@
+// 错误的函数定义
+int main(int x)
+{
+    int a = 1;
+}
